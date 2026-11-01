@@ -1,29 +1,22 @@
 # Desk Cat Status · 桌边小猫
 
-A local desk status display for office workers. Choose a status before stepping away; colleagues can see what you are doing, how long you have been away, and leave a note on the same screen.
+This is a fun tool designed for office workers. When a user temporarily leaves their workstation due to meetings, meals, or breaks, they can choose to display the corresponding status on the workstation computer in advance. This allows colleagues who come to look for them to understand the user's current situation and the time they have left, thereby reducing the frustration of not being able to find the person and not knowing where they have gone. Colleagues can also leave messages directly on the screen, making it convenient for the user to check later when they return.
 
-## Run
+This small website transforms the display screens on workstations into an intuitive and interesting "status whiteboard". After downloading the project, simply open it with a browser without the need to register an account or connect to the internet.
 
-No packages, build step, account, or internet connection required. From your checkout directory:
-
-```sh
-python3 -m http.server 8000 --bind 127.0.0.1
-```
-
-Open `http://127.0.0.1:8000` in a modern browser. Stop with Ctrl+C. You can also open `index.html` directly, though local-storage behavior for file URLs varies by browser. This is a browser project; Python only serves static files.
 
 ## Main interaction
 
-Choose break, meal, meeting, sleep, or a custom status. Each of the five states has its own local GIF in assets/. A new status starts an elapsed timer. Selecting the same active status keeps its timer. Pause/resume and reset are explicit controls; going back to choose a status does not stop timing. “I'm back” ends the session. GIFs keep their original proportions inside a fixed display area. Their original backgrounds and animation are preserved. Missing images fall back to the built-in SVG cat. Reduced-motion preferences replace GIFs with the static SVG cat.
-
-The status and timer recover after refresh if browser local storage is available. Timing uses timestamps rather than counting ticks. Unavailable storage shows a warning while the current session still works. Empty statuses and blank notes show feedback. Notes are visible to everyone at this screen, kept only in memory, and cleared on refresh or ending the session. Changing/resetting status does not delete them. Do not include sensitive information.
+The website offers four preset statuses—taking a break, eating, attending a meeting and sleeping—and allows users to enter a custom status. Selecting a status displays the corresponding cat GIF and starts a timer showing how long the user has been in that state. Selecting the current status again keeps the existing timer, while switching to another status starts a new timer. Users can also pause, resume or reset the timer. Visiting colleagues can leave messages for the user to read when they return. Clicking “I'm back” ends the current timer and clears the messages from the session.
 
 ![A break session in Desk Cat Status](assets/screenshot.png)
 
 ## Limits
 
-This is a single-device display, not a shared messaging service. It does not send notifications, authenticate colleagues, keep separate timer histories per status, or keep a computer awake. Timers depend on the device clock. No live site has been published. A real user trial remains to be recorded in PROCESS.md. The initial no-GIF version is preserved in Git history; a subsequent commit adds the five supplied GIFs.
+Currently, the website works on a single device, and statuses and messages cannot be synced across devices. Users can only read messages after returning to their desks. The website does not send notifications or allow users to reply directly. This keeps the tool simple and usable without an account, but makes it better suited to displaying desk status and receiving non-urgent messages than handling time-sensitive communication.
 
+A future improvement could connect the website to workplace messaging or social platforms that users already use. When a colleague leaves a message, the user could receive a notification through their chosen platform and read or reply while away from their desk, without downloading another application. This feature should be optional and clearly explain where messages are sent and how they are stored, preventing information intended for the desk screen from being shared unexpectedly.
 ## Credits
 
-Based on the owner-supplied `index.html` prototype; original authorship and previous tool use still need confirmation. The warm palette, two-screen flow, status concept and notes are retained. OpenAI Codex assisted with the offline implementation, SVG fallback cat, GIF integration, documentation and automated checks. The five GIFs were supplied by the owner in gif.zip; original artists, source links and sharing permissions remain to be documented by the owner. No external fonts, libraries or audio are used. See PROCESS.md for decisions and AI disclosure.
+This project draws on the Week 05 class examples “tiny-image” and “moving-dot,” taking inspiration from their approaches to displaying colour and creating animation on a webpage. During development, I used OpenAI Codex to help write and refine the webpage code, including the timer’s start, pause, resume, reset and end logic, as well as status switching, GIF display and messaging features. The original cat images came from publicly available online resources and were all static images. I edited and animated them in Adobe Photoshop, then exported them as GIFs. The website uses system fonts and does not include external fonts or sound effects.
+
