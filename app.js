@@ -1,10 +1,8 @@
 'use strict';
 const STATES = {
-  work: ['💻', 'Working', 'Focusing — please come back later.'],
   break: ['🎧', 'Taking a break', 'Back in a little while.'],
   eat: ['🍽️', 'Out for a meal', 'Away from my desk for a meal.'],
   meeting: ['💬', 'In a meeting', 'Available afterwards.'],
-  movie: ['🎬', 'Watching a movie', 'Enjoying a little screen time.'],
   sleep: ['💤', 'Sleeping', 'Quiet time, please.']
 };
 const $ = id => document.getElementById(id);
@@ -31,6 +29,13 @@ function showSession() {
   $('currentStatus').textContent = session.title;
   $('statusDescription').textContent = STATES[session.key]?.[2] || 'Away from my desk. Please leave a note.';
   $('catActivity').textContent = STATES[session.key]?.[0] || '🐾';
+  const image = $('catGif');
+  const source = `assets/${session.key}.gif`;
+  if (image.getAttribute('src') !== source) {
+    $('catStage').classList.remove('media-failed');
+    image.alt = `Cat illustration for: ${session.title}`;
+    image.src = source;
+  }
   $('openEyes').style.display = session.key === 'sleep' ? 'none' : '';
   $('sleepEyes').style.display = session.key === 'sleep' ? '' : 'none';
   $('sleepEyes').removeAttribute('hidden');
@@ -56,6 +61,10 @@ for (const [key, [emoji, title, description]] of Object.entries(STATES)) {
   const quick = document.createElement('button'); quick.textContent = `${emoji} ${title}`; quick.dataset.status = key;
   quick.addEventListener('click', () => choose(key)); $('quickChoices').append(quick);
 }
+$('catGif').addEventListener('error', () => {
+  $('catStage').classList.add('media-failed');
+  announce('Cat image unavailable. Showing the built-in cat; your status and timer still work.');
+});
 $('customForm').addEventListener('submit', event => {
   event.preventDefault(); const title = $('customStatus').value.trim();
   if (!title) {

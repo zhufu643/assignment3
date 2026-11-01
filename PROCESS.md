@@ -42,3 +42,11 @@ At the owner's request, this working version is being saved as a separate develo
 ## Repository milestone
 
 The owner selected zhufu643/assignment3 as the assignment repository. This commit adds the working no-GIF version on top of its existing README/PROCESS history. Implementation and browser validation were completed in the earlier workspace before copying these web files here. The earlier implementation history is not fabricated or backdated. Future changes and trial-driven revisions should be committed as they occur.
+
+## Development milestone: five supplied GIF states
+
+The owner supplied gif.zip containing five animated GIFs, explicitly mapped to meal, meeting, custom status, sleep and break. This revision adds those original files without re-encoding, removes work/movie choices, and maps custom input to custom.gif. The originals have different dimensions and backgrounds; object-fit: contain preserves their proportions in a fixed display area, but does not remove baked-in backgrounds or correct motion already inside the animations. No frame alignment or transparency edits are claimed. Missing images fall back to the SVG cat. Reduced-motion mode uses the static SVG instead of animated GIFs. Timers and notes remain as before.
+
+Codex assisted with this integration and browser validation. Original GIF authors, source URLs and permission to redistribute remain for the owner to document; the GIF art is not claimed as original work by this project. This is a real second-stage change after the no-GIF commit, not a reconstruction of development history. The real user trial is still pending. Earlier no-external-media statements above describe the first milestone only.
+
+GIF-stage validation: Chromium successfully loaded all five local GIF files in their mapped states. Status selection, repeated selection, pause/resume, refresh recovery, reset, custom input, visitor notes, note-clearing confirmation, 375px layout, blocked/corrupt storage and reduced-motion fallback passed. A deliberately unavailable eat.gif showed the SVG fallback while the status remained usable. No page JavaScript errors were observed. README screenshot was refreshed from this version. JavaScript syntax and whitespace checks passed.
